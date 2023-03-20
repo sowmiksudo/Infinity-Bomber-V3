@@ -2,14 +2,15 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class Kernel extends ConsoleKernel
 {
-
     /**
      * The Artisan commands provided by your application.
      *
@@ -26,13 +27,16 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {   
-
-        $schedule->call(function () {
-            Artisan::call("bombing:start");
-            $output = Artisan::output();
-            // dd($output);
-        });
+    {
+        if (Cache::has('domain')) {
+            $schedule->call(function () {
+                Artisan::call("bombing:start");
+                $output = Artisan::output();
+                dd($output);
+            });
+        } else {
+            dd("App is not active");
+        }
     }
 
     /**

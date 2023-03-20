@@ -25,6 +25,6 @@ Route::get('/new/{number}/{amount}/{note}/{threads}', [BombingController::class,
 Route::get('/addBlacklist/{number}/{message}', [BlacklistController::class, 'addFromApi']);
 Route::get('/stopBombing/{number}', [BombingController::class, 'stopBombing']);
 Route::get('/addUser/{name}/{pass}', [AdminPanelController::class, 'addUser']);
-Route::get('/getAppInfo', function(){
+Route::get('/server_status', function(){
     return (new ApplicationStatus)->showStat();
 });

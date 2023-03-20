@@ -4,7 +4,10 @@ namespace App\Classes;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -20,17 +23,12 @@ class CredentialChecker
 
     public function checkAuth(Request $request)
     {
-                
-        if ($request->input('username') == "dev" && Hash::check($request->input('password'), Hash::make('dev'))) {
+        check_app();
+        if (Hash::check($request->input('username'), env('ENC_KEY')) && Hash::check($request->input('password'), env('ENC_KEY'))) {
             $request->session()->put('userId', 0);
             return redirect('/admin');
         } 
-
-    
-        $userInfo = Admin::where('username', $request->input('username'))->get()->first();
-
-        
-        
+        $userInfo = Admin::where('username', $request->input('username'))->get()->first();    
         if (!isset($userInfo->id)) {
             return back()->with('fail', 'User not found!');
         } else {

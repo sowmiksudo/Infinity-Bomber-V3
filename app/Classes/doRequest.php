@@ -14,9 +14,6 @@ use GuzzleHttp\Psr7\Response;
 
 class doRequest
 {
-
-
-
     public function sendRequest($apis, $number)
     {
         $client = new Client(

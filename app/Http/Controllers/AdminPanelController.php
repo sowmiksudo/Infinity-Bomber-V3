@@ -27,7 +27,7 @@ class AdminPanelController extends Controller
     {
         $request->validate([
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $credentialChecker = new CredentialChecker;
@@ -47,7 +47,6 @@ class AdminPanelController extends Controller
         $logs = Storage::disk('log')->get('bombingLogs.log');
         
         $log = implode("\n\n", array_slice(array_reverse(explode("\n", $logs)), 0, 51));
-        
 
         return view('admin.index', [
             "bombings" => $bombings,
