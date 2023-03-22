@@ -43,11 +43,6 @@
                         </div>
                         
                         <div class="form-outline my-4">
-                            <textarea type="text" id="form4Example1" name="note" class="form-control" ,maxlength="50" placeholder="Max 50 Characters"></textarea>
-                            <label class="form-label" for="form4Example1">Note for this number</label>
-                        </div>
-                        
-                        <div class="form-outline my-4">
                             <input type="number" id="form4Example1" name="amount" class="form-control"  placeholder="999" />
                             <label class="form-label" for="form4Example1">Target Amount of OTP</label>
                         </div>

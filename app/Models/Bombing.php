@@ -11,6 +11,20 @@ class Bombing extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'bombings';
-    public $fillable = ["target","amount","sent","threads","note","user","ip","country"];
-}
+    public $fillable = [
+        "target",
+        "amount",
+        "sent",
+        "threads",
+        "user",
+        "ip",
+        "user_agent",
+        "user_id"
+    ];
 
+    
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+}

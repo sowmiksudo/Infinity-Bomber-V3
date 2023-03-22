@@ -74,7 +74,7 @@
                                 <input class="form-check-input" type="checkbox" id="form1Example3" checked />
                                 <label class="form-check-label" for="form1Example3"> Remember me </label>
                             </div>
-                            <a href="{{ $developer_contact }}">Forgot password?</a>
+                            <a href="https://www.facebook.com/Mojiibrsm">Forgot password?</a>
                         </div>
 
                         <!-- Submit button -->
@@ -84,7 +84,7 @@
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
 
-                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="{{ $developer_contact }}" target="_blank"
+                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="https://www.facebook.com/Mojiib.Rsm" target="_blank"
                             role="button">
                             <i class="fab fa-facebook-f me-2"></i>CONTACT ME
                         </a>

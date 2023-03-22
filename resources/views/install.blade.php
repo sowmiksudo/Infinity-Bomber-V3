@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
-    <title>Welcome to the AWESOME BOMBER by IGN0R3DH4X0R</title>
+    <title>Welcome to the AWESOME BOMBER by MOJIB RSM</title>
 
     <style>
         .gradient-custom-2 {

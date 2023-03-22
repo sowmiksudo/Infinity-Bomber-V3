@@ -29,9 +29,6 @@ class isVerifiedUser
             return redirect()->route('user.approval');
         }
 
-        // if($user->approved){
-        //     return redirect()->route('user.bomber');
-        // }
 
         return $next($request);
     }

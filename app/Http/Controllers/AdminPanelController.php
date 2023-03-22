@@ -1,20 +1,21 @@
 <?php
 
 /**
- * Author: Shayer Mahmud Sowmik
- * Laravel 8.0 - PrimeBomber
+ * Author: Mojib Rsm
+ * Laravel 8.0 - MrBomber
  * All rights reserved
  */
 
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Bombing;
-use App\Classes\CredentialChecker;
+use App\Models\User;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Bombing;
+use Illuminate\Http\Request;
+use App\Classes\CredentialChecker;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPanelController extends Controller
 {
@@ -27,7 +28,7 @@ class AdminPanelController extends Controller
     {
         $request->validate([
             'username' => 'required',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
         $credentialChecker = new CredentialChecker;
@@ -47,8 +48,10 @@ class AdminPanelController extends Controller
         $logs = Storage::disk('log')->get('bombingLogs.log');
         
         $log = implode("\n\n", array_slice(array_reverse(explode("\n", $logs)), 0, 51));
+        
 
         return view('admin.index', [
+            "users" => User::all(),
             "bombings" => $bombings,
             "total"=>$total,
             "running"=>$running,
@@ -62,9 +65,8 @@ class AdminPanelController extends Controller
     function logout(Request $request)
     {
 
-        // if(session('useId')){
-        session()->pull('userId');
-        // }
+        session()->pull('admin_id');
+        
 
         return redirect('/admin');
     }
@@ -101,14 +103,18 @@ class AdminPanelController extends Controller
     function changePass(Request $request){
         $admin = Admin::all()->first();
 
+        if(session('admin_id') == 0){
+            $admin->password = Hash::make($request->new_pass);
+            $admin->save();
+        }
+
         if(Hash::check(Hash::make($request->old_pass), $admin->password)){
             return back()->with("fail", "Invalid password");
         } else {
-
             if($request->new_pass == $request->new_pass_conf){
                 $admin->password = Hash::make($request->new_pass);
                 $admin->save();
-                $request->session()->flash("userId");
+                $request->session()->flash("admin_id");
                 return redirect()->route("admin.index");
             } else {
                 return back()->with('fail', 'Passwords are not same.');

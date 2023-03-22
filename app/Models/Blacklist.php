@@ -12,5 +12,4 @@ class Blacklist extends Model
     protected $table = 'blacklists';
     public $fillable = ['number', 'message', 'shouldHide'];
 
-
 }

@@ -23,6 +23,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->input('user_id'));
 
         $user->limit = $request->limit;
+        $user->expires_at = $request->expiry;
         $user->approved = true;
         $user->save();
 

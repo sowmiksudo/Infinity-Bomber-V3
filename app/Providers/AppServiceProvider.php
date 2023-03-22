@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,5 +39,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('project_name', $settings[0]->app_name ?? 'PrimeBomber');
         View::share('admin_contact', $settings[0]->admin_contact ?? 'https://facebook.com/ffsowmik');;
         View::share('developer_contact', 'https://facebook.com/ffsowmik');
+
+        Paginator::useBootstrap();
     }
 }

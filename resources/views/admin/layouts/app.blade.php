@@ -12,10 +12,10 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css">
     <style>
-
 
         select {
             width: 50% !important;
@@ -95,6 +95,14 @@
                             class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.addBombing') ? 'active' : '' }}">
                             <i class="fas fa-plus-circle fa-fw me-3"></i><span>New</span>
                         </a>
+                        <a href="{{ route('admin.users.index') }}" target=""
+                            class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
+                            <i class="fas fa-address-book fa-fw me-3"></i><span>Users</span>
+                        </a>
+                        <a href="{{ route('admin.notice.index') }}" target=""
+                            class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.notice.index') ? 'active' : '' }}">
+                            <i class="fas fa-question-circle fa-fw me-3"></i><span>Notice</span>
+                        </a>
                         <a href="{{ route('admin.history') }}"
                             class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.history') ? 'active' : '' }}">
                             <i class="fas fa-history fa-fw me-3"></i><span>History</span>
@@ -103,12 +111,10 @@
                             class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.bombings') ? 'active' : '' }}">
                             <i class="fas fa-clock fa-fw me-3"></i><span>Running</span>
                         </a>
-
                         <a href="{{ route('admin.blacklist') }}"
                             class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.blacklist') ? 'active' : '' }}">
                             <i class="fas fa-shield-alt fa-fw me-3"></i><span>Blacklist</span>
                         </a>
-
                         <a href="{{ route('admin.addBlacklist') }}"
                             class="px-5 list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('admin.addBlacklist') ? 'active' : '' }}">
                             <i class="fas fa-plus-square fa-fw me-3"></i><span>New</span>
@@ -217,7 +223,6 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js">
         </script>
 
-
     </body>
-
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
 </html>

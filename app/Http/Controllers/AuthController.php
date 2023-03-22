@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,5 +63,9 @@ class AuthController extends Controller
 
     public function approval(){
         return view('public.approval');
+    }
+    
+    public function expired(){
+        return view('public.expired');
     }
 }

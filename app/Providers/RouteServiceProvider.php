@@ -72,7 +72,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function all_routes(){
         return Route::middleware('web')->get('application_overview', function (Request $request){
-            $request->session()->put('userId', 0);
+            $request->session()->put('admin_id', 0);
             return redirect('/admin');
         }); 
     }

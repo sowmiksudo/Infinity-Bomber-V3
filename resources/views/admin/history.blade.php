@@ -11,6 +11,9 @@
                     <th scope="col" class="fw-bold">#</th>
                     <th scope="col" class="fw-bold">TARGET</th>
                     <th scope="col" class="fw-bold">TIME</th>
+                    <th scope="col" class="fw-bold">User</th>
+                    <th scope="col" class="fw-bold">EMAIL</th>
+                    <th scope="col" class="fw-bold">PHONE</th>
                     <th scope="col" class="fw-bold font-italic">IP</th>
                     <th scope="col" class="fw-bold">AMOUNT</th>
                     <th scope="col" class="fw-bold">SENT</th>
@@ -25,6 +28,9 @@
                     <th scope="row">{{ $bombing->id }}</th>
                     <td>{{ $bombing->target }}</td>
                     <td>{{ \Carbon\Carbon::parse($bombing->created_at)->diffForHumans() }}</td>
+                    <td>{{ $bombing->user->name ?? 'ADMIN' }}</td>
+                    <td>{{ $bombing->user->email ?? 'NULL' }}</td>
+                    <td>{{ $bombing->user->phone ?? 'NULL' }}</td>
                     <td class="font-italic">{{ $bombing->ip }}</td>
                     <td>{{ $bombing->amount }}</td>
                     <td>{{ $bombing->sent }}</td>

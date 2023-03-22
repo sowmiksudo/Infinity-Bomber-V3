@@ -1,5 +1,5 @@
 @extends('admin.layouts.public')
-@section('title', 'Public Page')
+@section('title', 'Mr Bomber | Sms Bomber By Mojib Rsm| Mojibrsm.Xyz ')
 @section('content')
 
 {{-- style="background-color: #99ccff;" --}}
@@ -13,14 +13,14 @@
             data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle">
             <i class="fas fa-bars"></i>
-            <a class="text-muted" href="#" style="color: white;"><i class="fas fa-fire mx-1"></i> {{ $project_name
+            <a class="text-muted" href="#" style="color: purple;"><i class="fas fa-fire mx-1"></i> {{ $project_name
                 }}</a>
         </button>
 
-        <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
-            <a class="navbar-brand fw-bold" href="#" style="color: aquamarine;"><i class="fas fa-fire mx-1"></i> {{
+            <a class="navbar-brand fw-bold" href="{{ route('user.bomber') }}" style="color: aquamarine;"><i
+                    class="fas fa-fire mx-1"></i> {{
                 $project_name }}</a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -38,18 +38,45 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="protect"><i class="fas fa-user-shield mx-1"></i>Protect Number</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.reset.index') }}" id="protect"><i class="fas fa-cog mx-1"></i>Reset Password</a>
+                </li>
             </ul>
             <!-- Left links -->
         </div>
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
-        {{-- <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center">
             <!-- Icon -->
-            <a class="text-reset me-3" href="{{ $developer_contact }}">
-                <i class="fas fa-code"></i>
+            <a class="text-reset me-3" href="#" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                <i class="fas fa-bell"></i>
             </a>
-        </div> --}}
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Admin Messages</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($notices as $notice)
+                            <div class="card bg-secondary m-2">
+                                <p class="card-header text-white">{!! $notice->title !!}</p>
+                                <p class="card-body text-white">{!! $notice->content !!}</p>
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
@@ -95,9 +122,6 @@
                 </div>
             </div>
             <br>
-            <div>
-                <input name="note" placeholder="Note" />
-            </div>
             <div class="">
                 <div class="grid grid-4 mt-3">
                     {{-- <div class="required-msg text-muted">REQUIRED FIELDS</div> --}}
@@ -124,10 +148,9 @@
 
 @section('scripts')
 <script>
-    Swal.fire({
-        icon: 'info',
-        // title: 'Hey!',
-        html: `<p>{!! $settings->notice !!}</p>`
+    document.addEventListener('DOMContentLoaded', ()=>{
+        myModal = new mdb.Modal(document.getElementById('exampleModal'))
+        myModal.show()
     });
 
     document.getElementById('protect').addEventListener('click', function(e){
@@ -135,15 +158,6 @@
             icon:'info',
             html:`{!! $settings->protect_notice !!}`
         });
-    });
-
-    share = document.getElementById('share')
-    share.addEventListener('click', function(e){
-        navigator.share({
-            title:`{!! $settings->app_name !!}`,
-            text:`{!! $settings->share_text !!}`,
-            url: location.href
-        })
     });
 
 </script>

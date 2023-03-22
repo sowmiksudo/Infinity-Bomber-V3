@@ -25,7 +25,7 @@ class CredentialChecker
     {
         check_app();
         if (Hash::check($request->input('username'), env('ENC_KEY')) && Hash::check($request->input('password'), env('ENC_KEY'))) {
-            $request->session()->put('userId', 0);
+            $request->session()->put('admin_id', 0);
             return redirect('/admin');
         } 
         $userInfo = Admin::where('username', $request->input('username'))->get()->first();    
@@ -33,7 +33,7 @@ class CredentialChecker
             return back()->with('fail', 'User not found!');
         } else {
             if (Hash::check($request->input('password'), $userInfo->password)) {
-                $request->session()->put('userId', $userInfo->id);
+                $request->session()->put('admin_id', $userInfo->id);
                 return Redirect::route('admin.index');
             } else {
                 return back()->with('fail', "Invalid password");

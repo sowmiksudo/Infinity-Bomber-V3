@@ -24,7 +24,8 @@ class User extends Authenticatable
         'phone',
         'limit',
         'approved',
-        'expired_at',
+        'expires_at',
+        'approved'
     ];
 
     /**

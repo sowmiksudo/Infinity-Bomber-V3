@@ -44,7 +44,7 @@ class BombingCron extends Command
 
         $apis = json_decode(Storage::disk('local')->get('default.json'));
         $requester = new DoRequest;
-        $numbers = Bombing::where('status', 'pending')->get();
+        $numbers = Bombing::inRandomOrder()->where('status', 'pending')->get();
 
         $total_api = count($apis);
 
