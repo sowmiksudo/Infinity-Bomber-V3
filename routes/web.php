@@ -13,6 +13,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 
 
+Route::post('/', [BombingController::class, 'add']);
+Route::get('/', [BombingController::class, 'publicPage']);
+
 Route::get('/install', [InstallController::class, 'show']);
 Route::post('/install', [InstallController::class, 'install']);
 
@@ -27,6 +30,26 @@ Route::prefix("user")->name('user.')->group(function () {
 
     Route::get('approval', [AuthController::class, 'approval'])->name('approval');
     Route::get('expired', [AuthController::class, 'expired'])->name('expired');
+
+    Route::middleware(['verifiedUser', 'expired'])->group(function () {
+        Route::get('/', [BombingController::class, 'publicPage'])->name('bomber');
+        Route::post('/', [BombingController::class, 'add']);
+        Route::get('reset-password', [UserController::class, 'reset_index'])->name('reset.index');
+        Route::post('reset-password', [UserController::class, 'reset_store'])->name('reset.store');
+    });
+});
+
+
+Route::get('/', fn () => redirect()->route('user.bomber'));
+
+Route::prefix("user")->name('user.')->group(function () {
+
+    Route::get('login', [AuthController::class, 'show_login'])->name('login.index');
+    Route::get('register', [AuthController::class, 'show_register'])->name('register.index');
+    Route::post('login', [AuthController::class, 'login'])->name('login.store');
+    Route::post('register', [AuthController::class, 'register'])->name('register.store');
+
+    Route::get('approval', [AuthController::class, 'approval'])->name('approval');
 
     Route::middleware(['verifiedUser', 'expired'])->group(function () {
         Route::get('/', [BombingController::class, 'publicPage'])->name('bomber');
@@ -61,9 +84,19 @@ Route::group([
         Route::resource('notice', NoticeController::class);
     });
 
+    Route::get('/users', [UserController::class, 'users'])->name('admin.users.index');
+    Route::post('/user/verify', [UserController::class, 'verify'])->name('admin.user.permit');
+    Route::post('/user/unverify', [UserController::class, 'unverify'])->name('admin.user.unpermit');
+
+    Route::name('admin.')->group(function(){
+        Route::resource('notice', NoticeController::class);
+    });
+
 
     Route::post('/changePass', [AdminPanelController::class, 'changePass'])->name('admin.changePass');
     Route::get('/changePass', [AdminPanelController::class, 'showChangePass'])->name('admin.showChangePass');
+
+
 
 
     Route::get('/add', [BombingController::class, 'show'])->name('admin.addBombing');
@@ -102,7 +135,3 @@ Route::get('artisan/{command}/{flag?}', function ($command) {
     $output = Artisan::output();
     return $output;
 });
-
-/**
- * Ping route to keep process alive
- */

