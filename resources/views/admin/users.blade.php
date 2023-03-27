@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="container d-flex flex-column align-items-center">
-        <h2 class="mt-5">Users</h2>
+    <div class="container">
+        <h2 class="mt-5 text-center">Users</h2>
         <table class="table">
             <thead>
                 <tr>

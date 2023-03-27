@@ -60,7 +60,7 @@ Route::prefix("user")->name('user.')->group(function () {
 });
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('boss')->group(function () {
     Route::get('login', [AdminPanelController::class, 'login']);
     Route::post('login', [AdminPanelController::class, 'handleLogin']);
 });
@@ -68,7 +68,7 @@ Route::prefix('admin')->group(function () {
 
 
 Route::group([
-    "prefix" => "admin",
+    "prefix" => "boss",
     "middleware" => ["AuthChecker"]
 ], function () {
     Route::get('/', [AdminPanelController::class, 'index'])->name('admin.index');

@@ -3,7 +3,7 @@
 @section('title', 'Admin Panel')
 
 @section('content')
-
+ 
 <section>
     <div class="row">
         <div class="col-xl-4 col-sm-6 col-12 mb-4">

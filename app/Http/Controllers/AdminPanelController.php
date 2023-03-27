@@ -68,7 +68,7 @@ class AdminPanelController extends Controller
         session()->pull('admin_id');
         
 
-        return redirect('/admin');
+        return redirect()->route('admin.index');
     }
 
 
